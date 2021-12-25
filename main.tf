@@ -17,7 +17,7 @@ resource "azurerm_resource_group" "schwarz" {
   location = "east us 2"
 
   tags = {
-    environment = "schwarzdev"
+    environment = "development"
   }
 }
 
@@ -29,7 +29,7 @@ resource "azurerm_virtual_network" "schwarz" {
   resource_group_name = azurerm_resource_group.schwarz.name
 
   tags = {
-    environment = "schwarzdev"
+    environment = "development"
   }
 }
 
@@ -49,7 +49,7 @@ resource "azurerm_public_ip" "schwarz" {
   allocation_method   = "Dynamic"
 
   tags = {
-    environment = "schwarzdev"
+    environment = "development"
   }
 }
 
@@ -72,7 +72,7 @@ resource "azurerm_network_security_group" "schwarz" {
   }
 
   tags = {
-    environment = "schwarzdev"
+    environment = "development"
   }
 }
 
@@ -90,7 +90,7 @@ resource "azurerm_network_interface" "schwarz" {
   }
 
   tags = {
-    environment = "schwarzdev"
+    environment = "development"
   }
 }
 
@@ -119,7 +119,7 @@ resource "azurerm_storage_account" "schwarz" {
   account_replication_type = "LRS"
 
   tags = {
-    environment = "schwarzdev"
+    environment = "development"
   }
 }
 
@@ -169,6 +169,6 @@ resource "azurerm_linux_virtual_machine" "schwarz" {
   }
 
   tags = {
-    environment = "schwarzdev"
+    environment = "development"
   }
 }
