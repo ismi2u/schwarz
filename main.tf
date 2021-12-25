@@ -140,12 +140,12 @@ resource "azurerm_linux_virtual_machine" "schwarz" {
   resource_group_name   = azurerm_resource_group.schwarz.name
   network_interface_ids = [azurerm_network_interface.schwarz.id]
   size                  = "Standard_B1s"
-#   size                  = "Standard_DS1_v2"
+  #   size                  = "Standard_DS1_v2"
 
   os_disk {
-    name                 = "myOsDisk"
+    name                 = "schwarz_osdisk"
     caching              = "ReadWrite"
-    storage_account_type = "Premium_LRS"
+    storage_account_type = "Standard_LRS"
   }
 
   source_image_reference {
@@ -154,6 +154,29 @@ resource "azurerm_linux_virtual_machine" "schwarz" {
     sku       = "20_04-LTS"
     version   = "latest"
   }
+
+
+  resource "azurerm_virtual_machine_extension" "schwarz" {
+    name                 = "schwarzdevm"
+    virtual_machine_id   = azurerm_linux_virtual_machine.schwarz.id
+    publisher            = "Microsoft.Azure.Extensions"
+    type                 = "CustomScript"
+    type_handler_version = "2.0"
+
+    settings = <<SETTINGS
+    {
+        "commandToExecute": "hostname && uptime"
+    }
+SETTINGS
+
+
+    tags = {
+      environment = "development"
+    }
+  }
+
+
+
 
   computer_name                   = "schwarzdevvm"
   admin_username                  = "azureuser"
